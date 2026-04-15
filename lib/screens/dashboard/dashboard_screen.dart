@@ -9,7 +9,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final p = Provider.of<DashboardProvider>(context);
-    const primaryTheme = Color(0xFF1A237E); // Deep Mining Navy
+    const primaryTheme = Color(0xFF1A237E);
 
     return DefaultTabController(
       length: 4,
@@ -20,6 +20,13 @@ class DashboardScreen extends StatelessWidget {
           foregroundColor: Colors.white,
           elevation: 0,
           title: const Text("Vela Mining Analytics"),
+          actions: [
+            // Added a manual refresh button in the AppBar
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: () => p.loadDashboard(),
+            ),
+          ],
           bottom: const TabBar(
             isScrollable: true,
             indicatorColor: Colors.amber,
@@ -35,22 +42,27 @@ class DashboardScreen extends StatelessWidget {
         ),
         body: p.isLoading
             ? const Center(child: CircularProgressIndicator())
-            : TabBarView(
-                children: [
-                  _buildOverview(p, primaryTheme),
-                  _buildHaulerList(p),
-                  _buildRouteVersus(p),
-                  _buildInsights(p),
-                ],
+            : RefreshIndicator(
+                onRefresh: () => p.loadDashboard(), // Pull-to-refresh logic
+                child: TabBarView(
+                  children: [
+                    _buildOverview(p, primaryTheme),
+                    _buildHaulerList(p),
+                    _buildRouteVersus(p),
+                    _buildInsights(p),
+                  ],
+                ),
               ),
       ),
     );
   }
 
-  // --- Tab 1: Overview with Bar Chart Visualization ---
+  // --- TAB 1: OVERVIEW ---
   Widget _buildOverview(DashboardProvider p, Color theme) {
     return ListView(
       padding: const EdgeInsets.all(16),
+      physics:
+          const AlwaysScrollableScrollPhysics(), // Important for RefreshIndicator
       children: [
         _sectionHeader("Fleet Performance (KPIs)"),
         LayoutBuilder(
@@ -94,7 +106,6 @@ class DashboardScreen extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         _sectionHeader("Fuel Consumption by Hauler"),
-        const SizedBox(height: 10),
         SizedBox(
           height: 220,
           child: BarChart(
@@ -147,12 +158,12 @@ class DashboardScreen extends StatelessWidget {
       ],
     );
   }
-  // --- TAB 2: HAULER ANALYSIS with Conditional Formatting ---
-  // This section replicates the "Hauler Performance" and "Operational Insights"
 
+  // --- TAB 2: HAULER LIST ---
   Widget _buildHaulerList(DashboardProvider p) {
     return ListView.builder(
       padding: const EdgeInsets.all(16),
+      physics: const AlwaysScrollableScrollPhysics(),
       itemCount: p.haulers.length,
       itemBuilder: (context, i) {
         final h = p.haulers[i];
@@ -165,16 +176,12 @@ class DashboardScreen extends StatelessWidget {
           ),
           margin: const EdgeInsets.only(bottom: 12),
           child: ExpansionTile(
-            // REMOVED 'side' parameter to fix the error
-            // Using shapes to prevent the black/rectangular border flicker
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
             collapsedShape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            backgroundColor: Colors.transparent,
-            collapsedBackgroundColor: Colors.transparent,
             leading: CircleAvatar(
               backgroundColor: h.statusColor.withOpacity(0.1),
               child: Text(
@@ -211,10 +218,11 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  // --- Tab 3: Route Comparison Versus UI ---
+  // --- TAB 3: ROUTE COMPARISON ---
   Widget _buildRouteVersus(DashboardProvider p) {
     return ListView.builder(
       padding: const EdgeInsets.all(16),
+      physics: const AlwaysScrollableScrollPhysics(),
       itemCount: p.comparisons.length,
       itemBuilder: (context, i) {
         final c = p.comparisons[i];
@@ -255,10 +263,11 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  // --- Tab 4: Savings & Bottlenecks ---
+  // --- TAB 4: SAVINGS & PENALTIES ---
   Widget _buildInsights(DashboardProvider p) {
     return ListView(
       padding: const EdgeInsets.all(16),
+      physics: const AlwaysScrollableScrollPhysics(),
       children: [
         _sectionHeader("Potential Optimization Savings"),
         ...p.benefits.map(
@@ -301,7 +310,7 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  // --- Helper Components ---
+  // --- REUSABLE HELPERS ---
   Widget _comparisonBox(String label, String value, Color color) => Expanded(
     child: Container(
       padding: const EdgeInsets.all(12),
