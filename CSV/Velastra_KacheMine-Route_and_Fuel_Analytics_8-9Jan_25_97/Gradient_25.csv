@@ -1,0 +1,6 @@
+Gradient,Definition,Distance (km),Fuel (L),Fuel / km
+Steep Down,≤ −8°,3.91,0.9,0.23
+Mild Down,−8° to −3°,2.41,0.6,0.25
+Flat,−3° to +3°,7.88,5.2,0.66
+Mild Up,+3° to +8°,4.76,6.48,1.36
+Steep Up,≥ +8°,8.98,13.02,1.45

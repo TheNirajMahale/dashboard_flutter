@@ -1,0 +1,9 @@
+As part of this round, we are sharing a report with you. Your task is to replicate the report and develop a dashboard using Flutter based on the provided data and structure. This will help us evaluate your practical skills in UI development, data representation, and overall application design.
+
+Assignment Details:
+
+    Replicate the shared report accurately
+
+    Create a functional and visually appealing dashboard using Flutter
+
+    Ensure proper structure, responsiveness, and clean code practices

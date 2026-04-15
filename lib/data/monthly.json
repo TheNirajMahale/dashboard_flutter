@@ -1,0 +1,535 @@
+{
+"Executive Summary":[
+ {
+  "MINING HAULER PERFORMANCE DASHBOARD": "Report Generated: 10 April 2026 15:50"
+ },
+ {
+  "MINING HAULER PERFORMANCE DASHBOARD": "📍 TMC Maintenance Area: Lat 20.4051928, Lon 81.0662203"
+ },
+ null,
+ {
+  "MINING HAULER PERFORMANCE DASHBOARD": "Total Fuel Consumed",
+  "Column2": "359.2 Liters",
+  "Column3": "₹33,935.45"
+ },
+ {
+  "MINING HAULER PERFORMANCE DASHBOARD": "Total Distance Traveled",
+  "Column2": "590.6 km"
+ },
+ {
+  "MINING HAULER PERFORMANCE DASHBOARD": "Total Trips Completed",
+  "Column2": "51"
+ },
+ {
+  "MINING HAULER PERFORMANCE DASHBOARD": "Average Fuel Efficiency",
+  "Column2": "0.61 L\/km"
+ },
+ {
+  "MINING HAULER PERFORMANCE DASHBOARD": "Number of Haulers Analyzed",
+  "Column2": "5"
+ }
+],
+"Hauler Performance":[
+ {
+  "Hauler ID": "133",
+  "Distance (km)": 252.1,
+  "Fuel (L)": 184.5,
+  "Cost (₹)": 17432.72,
+  "Trips": 13,
+  "Avg Speed (km\/h)": 4.8,
+  "Maintenance (minutes)": 4497
+ },
+ {
+  "Hauler ID": "137",
+  "Distance (km)": 222.6,
+  "Fuel (L)": 128.6,
+  "Cost (₹)": 12150.57,
+  "Trips": 13,
+  "Avg Speed (km\/h)": 35,
+  "Maintenance (minutes)": 5026
+ },
+ {
+  "Hauler ID": "135",
+  "Distance (km)": 87.8,
+  "Fuel (L)": 24.1,
+  "Cost (₹)": 2277.69,
+  "Trips": 13,
+  "Avg Speed (km\/h)": 4.4,
+  "Maintenance (minutes)": 2399
+ },
+ {
+  "Hauler ID": "134",
+  "Distance (km)": 18.6,
+  "Fuel (L)": 18.6,
+  "Cost (₹)": 1757.42,
+  "Trips": 6,
+  "Avg Speed (km\/h)": 4.4,
+  "Maintenance (minutes)": 762
+ },
+ {
+  "Hauler ID": "08",
+  "Distance (km)": 9.5,
+  "Fuel (L)": 3.4,
+  "Cost (₹)": 317.05,
+  "Trips": 6,
+  "Avg Speed (km\/h)": 3.1,
+  "Maintenance (minutes)": 0
+ }
+],
+"Excavator Analysis":[
+ {
+  "Equipment ID": "07",
+  "Type": "Excavator",
+  "Total Distance (km)": 5.5,
+  "Fuel (L)": 2,
+  "Cost (₹)": 190.16,
+  "Fuel\/km (L\/km)": 0.37,
+  "Avg Speed (km\/h)": 0,
+  "Idle %": 100,
+  "Maintenance %": 0,
+  "Operating Status": "Moving Operation"
+ }
+],
+"Route Analysis":[
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "Comparing fuel efficiency, distance, and gradient between routes"
+ },
+ null,
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "Hauler ID",
+  "Column2": "Route",
+  "Column3": "Distance (km)",
+  "Column4": "Fuel (L)",
+  "Column5": "Cost (₹)",
+  "Column6": "Fuel\/km (L\/km)",
+  "Column7": "Avg Pitch (°)",
+  "Column8": "Grade",
+  "Column9": "% of Travel",
+  "Column10": "Recommendation"
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "135",
+  "Column2": "Route A",
+  "Column3": 10.6,
+  "Column4": 4.15,
+  "Column5": 391.86,
+  "Column6": 0.391,
+  "Column7": 19.9,
+  "Column8": "Steep Up",
+  "Column9": 59.9,
+  "Column10": "Route B is more fuel efficient"
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "135",
+  "Column2": "Route B",
+  "Column3": 41.54,
+  "Column4": 10.58,
+  "Column5": 1000.04,
+  "Column6": 0.255,
+  "Column7": 35,
+  "Column8": "Steep Up",
+  "Column9": 26.6
+ },
+ null,
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "134",
+  "Column2": "Route A",
+  "Column3": 5.06,
+  "Column4": 5.24,
+  "Column5": 494.83,
+  "Column6": 1.035,
+  "Column7": 10.8,
+  "Column8": "Steep Up",
+  "Column9": 78,
+  "Column10": "Route B is more fuel efficient"
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "134",
+  "Column2": "Route B",
+  "Column3": 1.69,
+  "Column4": 1.57,
+  "Column5": 148.07,
+  "Column6": 0.926,
+  "Column7": 11.6,
+  "Column8": "Steep Up",
+  "Column9": 10.2
+ },
+ null,
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "133",
+  "Column2": "Route A",
+  "Column3": 24.75,
+  "Column4": 21.49,
+  "Column5": 2030.76,
+  "Column6": 0.868,
+  "Column7": 27.6,
+  "Column8": "Steep Up",
+  "Column9": 52.3,
+  "Column10": "Route B is more fuel efficient"
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "133",
+  "Column2": "Route B",
+  "Column3": 130.08,
+  "Column4": 90.33,
+  "Column5": 8535.74,
+  "Column6": 0.694,
+  "Column7": 28.8,
+  "Column8": "Steep Up",
+  "Column9": 37.3
+ },
+ null,
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "137",
+  "Column2": "Route A",
+  "Column3": 31.7,
+  "Column4": 20.05,
+  "Column5": 1894.77,
+  "Column6": 0.632,
+  "Column7": -1.2,
+  "Column8": "Flat",
+  "Column9": 56.6,
+  "Column10": "Route B is more fuel efficient"
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "137",
+  "Column2": "Route B",
+  "Column3": 95.64,
+  "Column4": 51.9,
+  "Column5": 4904.56,
+  "Column6": 0.543,
+  "Column7": 6.3,
+  "Column8": "Mild Up",
+  "Column9": 31.1
+ },
+ null,
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "08",
+  "Column2": "Route A",
+  "Column3": 5.51,
+  "Column4": 1.78,
+  "Column5": 168.54,
+  "Column6": 0.323,
+  "Column7": -18,
+  "Column8": "Steep Down",
+  "Column9": 82.2,
+  "Column10": "Route A is more fuel efficient"
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "08",
+  "Column2": "Route B",
+  "Column3": 1.67,
+  "Column4": 0.66,
+  "Column5": 62.71,
+  "Column6": 0.398,
+  "Column7": -15.4,
+  "Column8": "Steep Down",
+  "Column9": 13.1
+ },
+ null,
+ null,
+ null,
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "SUMMARY: ROUTE EFFICIENCY COMPARISON"
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "Hauler ID",
+  "Column2": "Route A (L\/km)",
+  "Column3": "Route B (L\/km)",
+  "Column4": "Better Route",
+  "Column5": "Fuel Saving (L\/km)"
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "135",
+  "Column2": 0.391,
+  "Column3": 0.255,
+  "Column4": "Route B",
+  "Column5": 0.136
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "134",
+  "Column2": 1.035,
+  "Column3": 0.926,
+  "Column4": "Route B",
+  "Column5": 0.109
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "133",
+  "Column2": 0.868,
+  "Column3": 0.694,
+  "Column4": "Route B",
+  "Column5": 0.174
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "137",
+  "Column2": 0.632,
+  "Column3": 0.543,
+  "Column4": "Route B",
+  "Column5": 0.089
+ },
+ {
+  "ROUTE COMPARISON: ROUTE A vs ROUTE B": "08",
+  "Column2": 0.323,
+  "Column3": 0.398,
+  "Column4": "Route A",
+  "Column5": 0.075
+ }
+],
+"Terrain Analysis":[
+ {
+  "Hauler ID": "135",
+  "Steep Up (km)": 0.51,
+  "Steep Up Fuel (L)": 0.53,
+  "Steep Down (km)": 83.84,
+  "Steep Down Fuel (L)": 20.96,
+  "Flat (km)": 3.43,
+  "Flat Fuel (L)": 2.61,
+  "Steep Grade %": 0.6,
+  "Efficiency on Steep": 1.04
+ },
+ {
+  "Hauler ID": "134",
+  "Steep Up (km)": 15.8,
+  "Steep Up Fuel (L)": 16.59,
+  "Steep Down (km)": 0.34,
+  "Steep Down Fuel (L)": 0.09,
+  "Flat (km)": 2.47,
+  "Flat Fuel (L)": 1.92,
+  "Steep Grade %": 84.9,
+  "Efficiency on Steep": 1.05
+ },
+ {
+  "Hauler ID": "133",
+  "Steep Up (km)": 151.3,
+  "Steep Up Fuel (L)": 158.86,
+  "Steep Down (km)": 99.91,
+  "Steep Down Fuel (L)": 24.98,
+  "Flat (km)": 0.86,
+  "Flat Fuel (L)": 0.63,
+  "Steep Grade %": 60,
+  "Efficiency on Steep": 1.05
+ },
+ {
+  "Hauler ID": "137",
+  "Steep Up (km)": 0.57,
+  "Steep Up Fuel (L)": 0.59,
+  "Steep Down (km)": 23.11,
+  "Steep Down Fuel (L)": 5.78,
+  "Flat (km)": 198.89,
+  "Flat Fuel (L)": 122.2,
+  "Steep Grade %": 0.3,
+  "Efficiency on Steep": 1.04
+ },
+ {
+  "Hauler ID": "08",
+  "Steep Up (km)": 0.85,
+  "Steep Up Fuel (L)": 0.89,
+  "Steep Down (km)": 7.83,
+  "Steep Down Fuel (L)": 1.96,
+  "Flat (km)": 0.78,
+  "Flat Fuel (L)": 0.51,
+  "Steep Grade %": 8.9,
+  "Efficiency on Steep": 1.05
+ },
+ null,
+ null,
+ {
+  "Hauler ID": "📊 Fuel Efficiency Explanation:"
+ },
+ {
+  "Hauler ID": "• Steep Up > 1.0 L\/km = Needs Improvement"
+ },
+ {
+  "Hauler ID": "• Steep Up 0.7-1.0 L\/km = Average"
+ },
+ {
+  "Hauler ID": "• Steep Up < 0.7 L\/km = Good\/Excellent"
+ }
+],
+"Trip Summary":[
+ {
+  "Hauler ID": "135",
+  "Total Trips": 13,
+  "Avg Fuel\/Trip (L)": 0.37,
+  "Avg Time\/Trip (hrs)": 1.24,
+  "Avg Distance\/Trip (km)": 1.24,
+  "Trips\/Hour": 0.07,
+  "Target Status": "✗ Target Not Met (<1.5 trips\/hr)"
+ },
+ {
+  "Hauler ID": "134",
+  "Total Trips": 6,
+  "Avg Fuel\/Trip (L)": 2.6,
+  "Avg Time\/Trip (hrs)": 8.37,
+  "Avg Distance\/Trip (km)": 2.62,
+  "Trips\/Hour": 0.03,
+  "Target Status": "✗ Target Not Met (<1.5 trips\/hr)"
+ },
+ {
+  "Hauler ID": "133",
+  "Total Trips": 13,
+  "Avg Fuel\/Trip (L)": 1.1,
+  "Avg Time\/Trip (hrs)": 0.3,
+  "Avg Distance\/Trip (km)": 1.42,
+  "Trips\/Hour": 0.07,
+  "Target Status": "✗ Target Not Met (<1.5 trips\/hr)"
+ },
+ {
+  "Hauler ID": "137",
+  "Total Trips": 13,
+  "Avg Fuel\/Trip (L)": 0.54,
+  "Avg Time\/Trip (hrs)": 0.9,
+  "Avg Distance\/Trip (km)": 0.95,
+  "Trips\/Hour": 0.08,
+  "Target Status": "✗ Target Not Met (<1.5 trips\/hr)"
+ },
+ {
+  "Hauler ID": "08",
+  "Total Trips": 6,
+  "Avg Fuel\/Trip (L)": 0.17,
+  "Avg Time\/Trip (hrs)": 0.36,
+  "Avg Distance\/Trip (km)": 0.42,
+  "Trips\/Hour": 0.22,
+  "Target Status": "✗ Target Not Met (<1.5 trips\/hr)"
+ },
+ null,
+ null,
+ {
+  "Hauler ID": "📊 PRODUCTIVITY SUMMARY (Target: 1.5 trips per hour)"
+ },
+ {
+  "Hauler ID": "Haulers Meeting Target:",
+  "Total Trips": "0 \/ 5"
+ },
+ {
+  "Hauler ID": "Haulers Below Target:",
+  "Total Trips": "5 \/ 5"
+ },
+ null,
+ {
+  "Hauler ID": "⚠️ TRIPS TAKING MORE THAN 1 HOUR"
+ },
+ {
+  "Hauler ID": "Hauler ID",
+  "Total Trips": "Trip #",
+  "Avg Fuel\/Trip (L)": "Duration (hrs)",
+  "Avg Time\/Trip (hrs)": "Distance (km)",
+  "Avg Distance\/Trip (km)": "Fuel (L)"
+ },
+ {
+  "Hauler ID": "135",
+  "Total Trips": 1,
+  "Avg Fuel\/Trip (L)": 9.21,
+  "Avg Time\/Trip (hrs)": 2.35,
+  "Avg Distance\/Trip (km)": 1.35
+ },
+ {
+  "Hauler ID": "135",
+  "Total Trips": 4,
+  "Avg Fuel\/Trip (L)": 3.1,
+  "Avg Time\/Trip (hrs)": 0.85,
+  "Avg Distance\/Trip (km)": 0.21
+ },
+ {
+  "Hauler ID": "134",
+  "Total Trips": 2,
+  "Avg Fuel\/Trip (L)": 18.28,
+  "Avg Time\/Trip (hrs)": 4.65,
+  "Avg Distance\/Trip (km)": 4.52
+ },
+ {
+  "Hauler ID": "134",
+  "Total Trips": 4,
+  "Avg Fuel\/Trip (L)": 1.84,
+  "Avg Time\/Trip (hrs)": 2.62,
+  "Avg Distance\/Trip (km)": 2.7
+ },
+ {
+  "Hauler ID": "134",
+  "Total Trips": 5,
+  "Avg Fuel\/Trip (L)": 2.58,
+  "Avg Time\/Trip (hrs)": 6.28,
+  "Avg Distance\/Trip (km)": 6.17
+ },
+ {
+  "Hauler ID": "134",
+  "Total Trips": 6,
+  "Avg Fuel\/Trip (L)": 18.75,
+  "Avg Time\/Trip (hrs)": 1.08,
+  "Avg Distance\/Trip (km)": 1.13
+ },
+ {
+  "Hauler ID": "133",
+  "Total Trips": 3,
+  "Avg Fuel\/Trip (L)": 1.02,
+  "Avg Time\/Trip (hrs)": 3.76,
+  "Avg Distance\/Trip (km)": 2.9
+ },
+ {
+  "Hauler ID": "137",
+  "Total Trips": 11,
+  "Avg Fuel\/Trip (L)": 2.91,
+  "Avg Time\/Trip (hrs)": 0.7,
+  "Avg Distance\/Trip (km)": 0.42
+ },
+ {
+  "Hauler ID": "137",
+  "Total Trips": 12,
+  "Avg Fuel\/Trip (L)": 1.87,
+  "Avg Time\/Trip (hrs)": 1.54,
+  "Avg Distance\/Trip (km)": 1
+ }
+],
+"Operational Insights":[
+ {
+  "Hauler ID": "135",
+  "Idle Pattern": "High Idle Time",
+  "Idle %": 92,
+  "Route Type": "Gentle Route",
+  "Avg Speed (km\/h)": 4.4,
+  "Fuel Efficiency": "Excellent",
+  "Maintenance (min)": 2399,
+  "Recommendation": "Excessive idle time; Low average speed - check vehicle condition; In maintenance 2399 minutes; Low productivity: 0.07 trips\/hr (target: 1.5); Use Route B for better fuel efficiency"
+ },
+ {
+  "Hauler ID": "134",
+  "Idle Pattern": "High Idle Time",
+  "Idle %": 92.8,
+  "Route Type": "Steep Route (High Grade)",
+  "Avg Speed (km\/h)": 4.4,
+  "Fuel Efficiency": "Needs Improvement",
+  "Maintenance (min)": 762,
+  "Recommendation": "High fuel consumption (1.0 L\/km) - check steep routes; Excessive idle time; Steep terrain 84.9% of journey; Low average speed - check vehicle condition; In maintenance 762 minutes; Low productivity: 0.03 trips\/hr (target: 1.5); Use Route B for better fuel efficiency"
+ },
+ {
+  "Hauler ID": "133",
+  "Idle Pattern": "High Idle Time",
+  "Idle %": 88.2,
+  "Route Type": "Steep Route (High Grade)",
+  "Avg Speed (km\/h)": 4.8,
+  "Fuel Efficiency": "Average",
+  "Maintenance (min)": 4497,
+  "Recommendation": "Excessive idle time; Steep terrain 60.0% of journey; Low average speed - check vehicle condition; In maintenance 4497 minutes; Low productivity: 0.07 trips\/hr (target: 1.5); Use Route B for better fuel efficiency"
+ },
+ {
+  "Hauler ID": "137",
+  "Idle Pattern": "High Idle Time",
+  "Idle %": 81.1,
+  "Route Type": "Gentle Route",
+  "Avg Speed (km\/h)": 35,
+  "Fuel Efficiency": "Good",
+  "Maintenance (min)": 5026,
+  "Recommendation": "Excessive idle time; In maintenance 5026 minutes; Low productivity: 0.08 trips\/hr (target: 1.5); Use Route B for better fuel efficiency"
+ },
+ {
+  "Hauler ID": "08",
+  "Idle Pattern": "High Idle Time",
+  "Idle %": 86.2,
+  "Route Type": "Gentle Route",
+  "Avg Speed (km\/h)": 3.1,
+  "Fuel Efficiency": "Excellent",
+  "Maintenance (min)": 0,
+  "Recommendation": "Excessive idle time; Low average speed - check vehicle condition; Low productivity: 0.22 trips\/hr (target: 1.5); Use Route A for better fuel efficiency"
+ }
+]
+}

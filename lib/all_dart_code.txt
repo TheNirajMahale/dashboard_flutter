@@ -1,0 +1,807 @@
+----------------------------------------------------------------
+FILE: main.dart
+LOCATION: /home/niraj/WorkSpace/Flutter/dashboard_app/lib/main.dart
+----------------------------------------------------------------
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/dashboard_provider.dart';
+import 'screens/dashboard/dashboard_screen.dart';
+
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => DashboardProvider()..loadJsonData(), // Check this name!
+      child: const MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Mining Dashboard',
+      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blue),
+      home: const DashboardScreen(),
+    );
+  }
+}
+
+
+
+----------------------------------------------------------------
+FILE: trip_model.dart
+LOCATION: /home/niraj/WorkSpace/Flutter/dashboard_app/lib/models/trip_model.dart
+----------------------------------------------------------------
+class Trip {
+  final String date;
+  final String route;
+  final String vehicle;
+  final double distance;
+  final double fuel;
+
+  Trip({
+    required this.date,
+    required this.route,
+    required this.vehicle,
+    required this.distance,
+    required this.fuel,
+  });
+
+  factory Trip.fromJson(Map<String, dynamic> json) {
+    return Trip(
+      date: json['date'],
+      route: json['route'],
+      vehicle: json['vehicle'],
+      distance: (json['distance']).toDouble(),
+      fuel: (json['fuel']).toDouble(),
+    );
+  }
+}
+
+
+
+----------------------------------------------------------------
+FILE: dashboard_models.dart
+LOCATION: /home/niraj/WorkSpace/Flutter/dashboard_app/lib/models/dashboard_models.dart
+----------------------------------------------------------------
+// Models for Analysis_Kache_monthly
+class FleetSummary {
+  final String totalFuel;
+  final String fuelCost;
+  final String totalDistance;
+  final String totalTrips;
+  final String efficiency;
+
+  FleetSummary({
+    this.totalFuel = "",
+    this.fuelCost = "",
+    this.totalDistance = "",
+    this.totalTrips = "",
+    this.efficiency = "",
+  });
+}
+
+class HaulerPerformance {
+  final String id;
+  final double distance;
+  final double fuel;
+  final int trips;
+  final double avgSpeed;
+
+  HaulerPerformance.fromJson(Map<String, dynamic> json)
+    : id = json['Hauler ID'].toString(),
+      distance = (json['Distance (km)'] ?? 0).toDouble(),
+      fuel = (json['Fuel (L)'] ?? 0).toDouble(),
+      trips = json['Trips'] ?? 0,
+      avgSpeed = (json['Avg Speed (km/h)'] ?? 0).toDouble();
+}
+
+// Models for Route_and_Fuel_Analytics
+class RouteComparison {
+  final String metric;
+  final String gentle;
+  final String steep;
+
+  RouteComparison.fromJson(Map<String, dynamic> json)
+    : metric = json['Metric'] ?? "",
+      gentle = json['Route A (Gentle)'] ?? "",
+      steep = json['Route B (Steep)'] ?? "";
+}
+
+class GradientStats {
+  final String gradient;
+  final double distance;
+  final double fuel;
+  final double fuelPerKm;
+
+  GradientStats.fromJson(Map<String, dynamic> json)
+    : gradient = json['Gradient'] ?? "",
+      distance = (json['Distance (km)'] ?? 0).toDouble(),
+      fuel = (json['Fuel (L)'] ?? 0).toDouble(),
+      fuelPerKm = (json['Fuel / km'] ?? 0).toDouble();
+}
+
+
+
+----------------------------------------------------------------
+FILE: fleet_models.dart
+LOCATION: /home/niraj/WorkSpace/Flutter/dashboard_app/lib/models/fleet_models.dart
+----------------------------------------------------------------
+import 'package:flutter/material.dart';
+
+class FleetSummary {
+  final String totalFuel, fuelCost, totalDistance, totalTrips, efficiency;
+  FleetSummary({
+    this.totalFuel = "0",
+    this.fuelCost = "0",
+    this.totalDistance = "0",
+    this.totalTrips = "0",
+    this.efficiency = "0",
+  });
+}
+
+class HaulerDetail {
+  final String id;
+  final double distance, fuel, avgSpeed, idlePercent;
+  final int trips;
+  final String recommendation;
+
+  HaulerDetail({
+    required this.id,
+    required this.distance,
+    required this.fuel,
+    required this.trips,
+    required this.avgSpeed,
+    required this.idlePercent,
+    required this.recommendation,
+  });
+
+  // Insights: Highlight bad performance in red
+  Color get statusColor => idlePercent > 85 ? Colors.red : Colors.green;
+}
+
+class RouteComparison {
+  final String metric, gentle, steep;
+  RouteComparison({
+    required this.metric,
+    required this.gentle,
+    required this.steep,
+  });
+}
+
+
+
+----------------------------------------------------------------
+FILE: dashboard_provider.dart
+LOCATION: /home/niraj/WorkSpace/Flutter/dashboard_app/lib/providers/dashboard_provider.dart
+----------------------------------------------------------------
+import 'package:flutter/material.dart';
+import '../models/fleet_models.dart';
+import '../services/data_service.dart';
+
+class DashboardProvider extends ChangeNotifier {
+  bool isLoading = true;
+  FleetSummary summary = FleetSummary();
+  List<HaulerDetail> haulers = [];
+  List<RouteComparison> comparisons = [];
+
+  Future<void> loadJsonData() async {
+    try {
+      isLoading = true;
+      notifyListeners();
+
+      final data = await DataService.loadAllJsonData();
+      final monthly = data['monthly'];
+      final route = data['route'];
+
+      // Parse Executive Summary
+      final exec = monthly['Executive Summary'];
+      summary = FleetSummary(
+        totalFuel: exec[3]['Column2'] ?? "0",
+        fuelCost: exec[3]['Column3'] ?? "0",
+        totalDistance: exec[4]['Column2'] ?? "0",
+        totalTrips: exec[5]['Column2'] ?? "0",
+        efficiency: exec[6]['Column2'] ?? "0",
+      );
+
+      // Parse Haulers & Operational Insights
+      final perfList = monthly['Hauler Performance'] as List;
+      final insList = monthly['Operational Insights'] as List;
+
+      haulers = perfList.map<HaulerDetail>((p) {
+        final id = p['Hauler ID'].toString();
+        final insight = insList.firstWhere(
+          (i) => i['Hauler ID'].toString() == id,
+          orElse: () => {},
+        );
+
+        return HaulerDetail(
+          id: id,
+          distance: (p['Distance (km)'] ?? 0).toDouble(),
+          fuel: (p['Fuel (L)'] ?? 0).toDouble(),
+          trips: p['Trips'] ?? 0,
+          avgSpeed: (p['Avg Speed (km/h)'] ?? 0).toDouble(),
+          idlePercent: (insight['Idle %'] ?? 0).toDouble(),
+          recommendation: insight['Recommendation'] ?? "No alerts.",
+        );
+      }).toList();
+
+      // Parse Route Comparisons
+      comparisons = (route['Route_Comparison'] as List)
+          .map<RouteComparison>(
+            (item) => RouteComparison(
+              metric: item['Metric'],
+              gentle: item['Route A (Gentle)'],
+              steep: item['Route B (Steep)'],
+            ),
+          )
+          .toList();
+
+      isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      debugPrint("Initialization Error: $e");
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+}
+
+
+
+----------------------------------------------------------------
+FILE: dashboard_screen.dart
+LOCATION: /home/niraj/WorkSpace/Flutter/dashboard_app/lib/screens/dashboard/dashboard_screen.dart
+----------------------------------------------------------------
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:fl_chart/fl_chart.dart';
+import '../../providers/dashboard_provider.dart';
+
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final p = Provider.of<DashboardProvider>(context);
+    const themeColor = Color(0xFF1A237E); // Professional Deep Blue
+
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF8F9FA),
+        appBar: AppBar(
+          backgroundColor: themeColor,
+          foregroundColor: Colors.white,
+          title: const Text("Mining Fleet Analytics"),
+          bottom: const TabBar(
+            indicatorColor: Colors.amber,
+            labelColor: Colors.amber,
+            unselectedLabelColor: Colors.white70,
+            tabs: [
+              Tab(text: "OVERVIEW"),
+              Tab(text: "HAULERS"),
+              Tab(text: "ROUTES"),
+            ],
+          ),
+        ),
+        body: p.isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : TabBarView(
+                children: [
+                  _buildOverview(p, themeColor),
+                  _buildHaulerList(p),
+                  _buildRouteVersus(p),
+                ],
+              ),
+      ),
+    );
+  }
+
+  // --- TAB 1: OVERVIEW with Bar Chart ---
+  Widget _buildOverview(DashboardProvider p, Color themeColor) {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        _buildSectionTitle("Fleet KPIs"),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            // Fixed responsiveness logic
+            int crossAxisCount = constraints.maxWidth > 600 ? 4 : 2;
+            return GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: crossAxisCount,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 1.5,
+              children: [
+                _kpiCard(
+                  "Total Fuel",
+                  p.summary.totalFuel,
+                  Icons.local_gas_station,
+                  Colors.orange,
+                ),
+                _kpiCard(
+                  "Distance",
+                  p.summary.totalDistance,
+                  Icons.route,
+                  Colors.blue,
+                ),
+                _kpiCard(
+                  "Efficiency",
+                  p.summary.efficiency,
+                  Icons.bolt,
+                  Colors.red,
+                ),
+                _kpiCard(
+                  "Trips",
+                  p.summary.totalTrips,
+                  Icons.fact_check,
+                  Colors.green,
+                ),
+              ],
+            );
+          },
+        ),
+        const SizedBox(height: 32),
+        _buildSectionTitle("Fuel Usage Comparison (Liters)"),
+        const SizedBox(height: 10),
+        SizedBox(
+          height: 200,
+          child: BarChart(
+            BarChartData(
+              barGroups: p.haulers
+                  .asMap()
+                  .entries
+                  .map(
+                    (e) => BarChartGroupData(
+                      x: e.key,
+                      barRods: [
+                        BarChartRodData(
+                          toY: e.value.fuel,
+                          color: themeColor,
+                          width: 20,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ],
+                    ),
+                  )
+                  .toList(),
+              titlesData: FlTitlesData(
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    getTitlesWidget: (val, _) => Text(
+                      p.haulers[val.toInt()].id,
+                      style: const TextStyle(fontSize: 10),
+                    ),
+                  ),
+                ),
+                leftTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                topTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+              ),
+              gridData: const FlGridData(show: false),
+              borderData: FlBorderData(show: false),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // --- TAB 2: HAULER ANALYSIS with Conditional Formatting ---
+  Widget _buildHaulerList(DashboardProvider p) {
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: p.haulers.length,
+      itemBuilder: (context, i) {
+        final h = p.haulers[i];
+        return Card(
+          margin: const EdgeInsets.only(bottom: 12),
+          child: ExpansionTile(
+            leading: CircleAvatar(
+              backgroundColor: h.statusColor.withOpacity(0.1),
+              child: Text(h.id, style: TextStyle(color: h.statusColor)),
+            ),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Fuel: ${h.fuel} L"),
+                Text("Speed: ${h.avgSpeed} km/h"),
+              ],
+            ),
+            subtitle: Text(
+              "${h.idlePercent}% Idle Time",
+              style: TextStyle(
+                color: h.statusColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  "Recommendation: ${h.recommendation}",
+                  style: const TextStyle(fontStyle: FontStyle.italic),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // --- TAB 3: ROUTE COMPARISON (Versus UI) ---
+  Widget _buildRouteVersus(DashboardProvider p) {
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: p.comparisons.length,
+      itemBuilder: (context, i) {
+        final c = p.comparisons[i];
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              c.metric.toUpperCase(),
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                _routeBox("GENTLE", c.gentle, Colors.green),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    "VS",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                _routeBox("STEEP", c.steep, Colors.red),
+              ],
+            ),
+            const SizedBox(height: 20),
+          ],
+        );
+      },
+    );
+  }
+
+  // --- UI COMPONENTS ---
+  Widget _routeBox(String label, String val, Color color) => Expanded(
+    child: Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withOpacity(0.2)),
+      ),
+      child: Column(
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 10,
+              color: color,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            val,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    ),
+  );
+
+  Widget _kpiCard(String title, String val, IconData icon, Color color) {
+    return Card(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: Colors.grey.shade200),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, color: color, size: 20),
+            const Spacer(),
+            Text(
+              title,
+              style: const TextStyle(color: Colors.grey, fontSize: 12),
+            ),
+            Text(
+              val,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF1A237E),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+----------------------------------------------------------------
+FILE: kpi_card.dart
+LOCATION: /home/niraj/WorkSpace/Flutter/dashboard_app/lib/widgets/kpi_card.dart
+----------------------------------------------------------------
+import 'package:flutter/material.dart';
+
+class KpiCard extends StatelessWidget {
+  final String title;
+  final String value;
+
+  const KpiCard({super.key, required this.title, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(title, style: const TextStyle(fontSize: 14)),
+            const SizedBox(height: 8),
+            Text(
+              value,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+----------------------------------------------------------------
+FILE: line_chart_widget.dart
+LOCATION: /home/niraj/WorkSpace/Flutter/dashboard_app/lib/widgets/line_chart_widget.dart
+----------------------------------------------------------------
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+
+class LineChartWidget extends StatelessWidget {
+  final Map<String, double> data;
+
+  const LineChartWidget({super.key, required this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    final entries = data.entries.toList();
+
+    return Card(
+      elevation: 3,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text("Distance Trend", style: TextStyle(fontSize: 16)),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 250,
+              child: LineChart(
+                LineChartData(
+                  borderData: FlBorderData(show: true),
+                  titlesData: FlTitlesData(
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        getTitlesWidget: (value, meta) {
+                          int index = value.toInt();
+                          if (index < entries.length) {
+                            return Text(
+                              entries[index].key,
+                              style: const TextStyle(fontSize: 10),
+                            );
+                          }
+                          return const Text('');
+                        },
+                      ),
+                    ),
+                  ),
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: List.generate(entries.length, (i) {
+                        return FlSpot(i.toDouble(), entries[i].value);
+                      }),
+                      isCurved: true,
+                      dotData: FlDotData(show: true),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+----------------------------------------------------------------
+FILE: bar_chart_widget.dart
+LOCATION: /home/niraj/WorkSpace/Flutter/dashboard_app/lib/widgets/bar_chart_widget.dart
+----------------------------------------------------------------
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+
+class BarChartWidget extends StatelessWidget {
+  final Map<String, double> data;
+
+  const BarChartWidget({super.key, required this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    final entries = data.entries.toList();
+
+    return Card(
+      elevation: 3,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text("Distance by Route", style: TextStyle(fontSize: 16)),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 250,
+              child: BarChart(
+                BarChartData(
+                  borderData: FlBorderData(show: false),
+                  titlesData: FlTitlesData(
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        getTitlesWidget: (value, meta) {
+                          int index = value.toInt();
+                          if (index < entries.length) {
+                            return Text(
+                              entries[index].key,
+                              style: const TextStyle(fontSize: 10),
+                            );
+                          }
+                          return const Text('');
+                        },
+                      ),
+                    ),
+                  ),
+                  barGroups: List.generate(entries.length, (i) {
+                    return BarChartGroupData(
+                      x: i,
+                      barRods: [BarChartRodData(toY: entries[i].value)],
+                    );
+                  }),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+----------------------------------------------------------------
+FILE: trip_table.dart
+LOCATION: /home/niraj/WorkSpace/Flutter/dashboard_app/lib/widgets/trip_table.dart
+----------------------------------------------------------------
+import 'package:flutter/material.dart';
+import '../models/trip_model.dart';
+
+class TripTable extends StatelessWidget {
+  final List<Trip> trips;
+
+  const TripTable({super.key, required this.trips});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text("Trip Data", style: TextStyle(fontSize: 16)),
+            const SizedBox(height: 10),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                columns: const [
+                  DataColumn(label: Text("Date")),
+                  DataColumn(label: Text("Route")),
+                  DataColumn(label: Text("Vehicle")),
+                  DataColumn(label: Text("Distance")),
+                  DataColumn(label: Text("Fuel")),
+                ],
+                rows: trips.map((trip) {
+                  return DataRow(
+                    cells: [
+                      DataCell(Text(trip.date)),
+                      DataCell(Text(trip.route)),
+                      DataCell(Text(trip.vehicle)),
+                      DataCell(Text(trip.distance.toString())),
+                      DataCell(Text(trip.fuel.toString())),
+                    ],
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+----------------------------------------------------------------
+FILE: data_service.dart
+LOCATION: /home/niraj/WorkSpace/Flutter/dashboard_app/lib/services/data_service.dart
+----------------------------------------------------------------
+import 'dart:convert';
+import 'package:flutter/services.dart';
+
+class DataService {
+  static Future<Map<String, dynamic>> loadAllJsonData() async {
+    // These paths must match your pubspec.yaml exactly
+    final String monthlyRes = await rootBundle.loadString(
+      'lib/data/monthly.json',
+    );
+    final String routeRes = await rootBundle.loadString(
+      'lib/data/Route_and_Fuel.json',
+    );
+
+    return {'monthly': json.decode(monthlyRes), 'route': json.decode(routeRes)};
+  }
+}
+
+
+
