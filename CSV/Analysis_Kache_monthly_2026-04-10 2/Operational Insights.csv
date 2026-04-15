@@ -1,6 +1,0 @@
-Hauler ID,Idle Pattern,Idle %,Route Type,Avg Speed (km/h),Fuel Efficiency,Maintenance (min),Recommendation
-135,High Idle Time,92,Gentle Route,4.4,Excellent,2399,Excessive idle time; Low average speed - check vehicle condition; In maintenance 2399 minutes; Low productivity: 0.07 trips/hr (target: 1.5); Use Route B for better fuel efficiency
-134,High Idle Time,92.8,Steep Route (High Grade),4.4,Needs Improvement,762,High fuel consumption (1.0 L/km) - check steep routes; Excessive idle time; Steep terrain 84.9% of journey; Low average speed - check vehicle condition; In maintenance 762 minutes; Low productivity: 0.03 trips/hr (target: 1.5); Use Route B for better fuel efficiency
-133,High Idle Time,88.2,Steep Route (High Grade),4.8,Average,4497,Excessive idle time; Steep terrain 60.0% of journey; Low average speed - check vehicle condition; In maintenance 4497 minutes; Low productivity: 0.07 trips/hr (target: 1.5); Use Route B for better fuel efficiency
-137,High Idle Time,81.1,Gentle Route,35,Good,5026,Excessive idle time; In maintenance 5026 minutes; Low productivity: 0.08 trips/hr (target: 1.5); Use Route B for better fuel efficiency
-08,High Idle Time,86.2,Gentle Route,3.1,Excellent,0,Excessive idle time; Low average speed - check vehicle condition; Low productivity: 0.22 trips/hr (target: 1.5); Use Route A for better fuel efficiency
