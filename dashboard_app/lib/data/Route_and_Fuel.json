@@ -1,0 +1,221 @@
+{
+"Per_Hauler_Summary":[
+ {
+  "Hauler": 25,
+  "Productive Distance (km)": 27.96,
+  "Productive Fuel (L)": 27.72,
+  "Avg Fuel \/ km": 0.99
+ },
+ {
+  "Hauler": 97,
+  "Productive Distance (km)": 24.3,
+  "Productive Fuel (L)": 16.85,
+  "Avg Fuel \/ km": 0.69
+ }
+],
+"Gradient_25":[
+ {
+  "Gradient": "Steep Down",
+  "Definition": "≤ −8°",
+  "Distance (km)": 3.91,
+  "Fuel (L)": 0.9,
+  "Fuel \/ km": 0.23
+ },
+ {
+  "Gradient": "Mild Down",
+  "Definition": "−8° to −3°",
+  "Distance (km)": 2.41,
+  "Fuel (L)": 0.6,
+  "Fuel \/ km": 0.25
+ },
+ {
+  "Gradient": "Flat",
+  "Definition": "−3° to +3°",
+  "Distance (km)": 7.88,
+  "Fuel (L)": 5.2,
+  "Fuel \/ km": 0.66
+ },
+ {
+  "Gradient": "Mild Up",
+  "Definition": "+3° to +8°",
+  "Distance (km)": 4.76,
+  "Fuel (L)": 6.48,
+  "Fuel \/ km": 1.36
+ },
+ {
+  "Gradient": "Steep Up",
+  "Definition": "≥ +8°",
+  "Distance (km)": 8.98,
+  "Fuel (L)": 13.02,
+  "Fuel \/ km": 1.45
+ }
+],
+"Gradient_97":[
+ {
+  "Gradient": "Steep Down",
+  "Definition": "≤ −8°",
+  "Distance (km)": 7.21,
+  "Fuel (L)": 1.66,
+  "Fuel \/ km": 0.23
+ },
+ {
+  "Gradient": "Flat",
+  "Definition": "−3° to +3°",
+  "Distance (km)": 9.88,
+  "Fuel (L)": 6.52,
+  "Fuel \/ km": 0.66
+ },
+ {
+  "Gradient": "Steep Up",
+  "Definition": "≥ +8°",
+  "Distance (km)": 7.21,
+  "Fuel (L)": 8.67,
+  "Fuel \/ km": 1.45
+ }
+],
+"Worst_Gradient_Penalty":[
+ {
+  "Rank": 1,
+  "Hauler": 25,
+  "Ramp ID": 64,
+  "Distance (km)": 3.62,
+  "Avg Pitch (°)": 10,
+  "Extra Fuel (L)": 2.35
+ },
+ {
+  "Rank": 2,
+  "Hauler": 25,
+  "Ramp ID": 65,
+  "Distance (km)": 2.47,
+  "Avg Pitch (°)": 15,
+  "Extra Fuel (L)": 1.74
+ },
+ {
+  "Rank": 3,
+  "Hauler": 25,
+  "Ramp ID": 63,
+  "Distance (km)": 1.9,
+  "Avg Pitch (°)": 27,
+  "Extra Fuel (L)": 1.5
+ }
+],
+"Speed_Analysis":[
+ {
+  "Hauler": 25,
+  "Avg Speed (km\/h)": 1.9,
+  "Interpretation": "Ramp-limited, stop-start climbs"
+ },
+ {
+  "Hauler": 97,
+  "Avg Speed (km\/h)": 3.3,
+  "Interpretation": "Smooth, continuous haul"
+ }
+],
+"Trips_and_Dumps":[
+ {
+  "Hauler": 25,
+  "Trips (24h)": "20–22",
+  "Dumps": "20–22"
+ },
+ {
+  "Hauler": 97,
+  "Trips (24h)": "18–20",
+  "Dumps": "18–20"
+ }
+],
+"Route_Comparison":[
+ {
+  "Metric": "Distance",
+  "Route A (Gentle)": "Longer",
+  "Route B (Steep)": "Shorter"
+ },
+ {
+  "Metric": "Max Gradient",
+  "Route A (Gentle)": "Low–moderate",
+  "Route B (Steep)": "High (10–27°)"
+ },
+ {
+  "Metric": "Fuel \/ km",
+  "Route A (Gentle)": "~0.50–0.55",
+  "Route B (Steep)": "~0.85–0.95"
+ },
+ {
+  "Metric": "Fuel \/ trip",
+  "Route A (Gentle)": "Lower",
+  "Route B (Steep)": "Higher"
+ },
+ {
+  "Metric": "Avg speed",
+  "Route A (Gentle)": "5–6 km\/h",
+  "Route B (Steep)": "1.5–2 km\/h"
+ },
+ {
+  "Metric": "Trips\/day",
+  "Route A (Gentle)": "Higher",
+  "Route B (Steep)": "Lower"
+ },
+ {
+  "Metric": "Gearbox \/ tyres",
+  "Route A (Gentle)": "Safer",
+  "Route B (Steep)": "High stress"
+ }
+],
+"Route_Benefit_Quantification":[
+ {
+  "Metric": "Fuel difference (L\/km)",
+  "Value": "0.35–0.40"
+ },
+ {
+  "Metric": "Typical haul length (km)",
+  "Value": "2.2–2.5"
+ },
+ {
+  "Metric": "Fuel saved per trip (L)",
+  "Value": "0.8–1.0"
+ },
+ {
+  "Metric": "Potential saving per day (₹)",
+  "Value": "₹1,900–₹2,400"
+ },
+ {
+  "Metric": "Potential saving per year (₹)",
+  "Value": "₹7–9 lakh"
+ }
+],
+"Idle_Time_Analysis":[
+ {
+  "Hauler": 25,
+  "Idle Misuse Pattern": "High"
+ },
+ {
+  "Hauler": 97,
+  "Idle Misuse Pattern": "Medium"
+ }
+],
+"Fuel_Cost_24h":[
+ {
+  "Hauler": 25,
+  "Fuel (L)": 27.72,
+  "Diesel Price (₹\/L)": 94.5,
+  "Fuel Cost (₹)": 2620,
+  "FuelCost(4-5thJan)": 1503,
+  "Fuel Cost (₹)(5-6thJan)": 1503,
+  "Fuel Cost (6-7th\/Jan))": 2429
+ },
+ {
+  "Hauler": 97,
+  "Fuel (L)": 16.85,
+  "Diesel Price (₹\/L)": 94.5,
+  "Fuel Cost (₹)": 1592,
+  "FuelCost(4-5thJan)": 482,
+  "Fuel Cost (₹)(5-6thJan)": 482,
+  "Fuel Cost (6-7th\/Jan))": 2722
+ },
+ {
+  "Fuel Cost (₹)": 4212,
+  "FuelCost(4-5thJan)": 1985,
+  "Fuel Cost (₹)(5-6thJan)": 1985,
+  "Fuel Cost (6-7th\/Jan))": 5151
+ }
+]
+}

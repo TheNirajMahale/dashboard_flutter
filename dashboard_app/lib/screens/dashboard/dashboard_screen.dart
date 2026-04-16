@@ -21,7 +21,7 @@ class DashboardScreen extends StatelessWidget {
           elevation: 0,
           title: const Text("Vela Mining Analytics"),
           actions: [
-            // Added a manual refresh button in the AppBar
+            // refresh button in the AppBar
             IconButton(
               icon: const Icon(Icons.refresh),
               onPressed: () => p.loadDashboard(),

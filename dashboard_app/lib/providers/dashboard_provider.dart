@@ -50,7 +50,7 @@ class DashboardProvider extends ChangeNotifier {
         );
       }).toList();
 
-      // 3. Process Route Comparison Summary [cite: 37]
+      // 3. Process Route Comparison Summary
       comparisons = (route['Route_Comparison'] as List).map<RouteComparison>((
         i,
       ) {

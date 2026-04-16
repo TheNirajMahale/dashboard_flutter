@@ -6,7 +6,7 @@ import 'screens/dashboard/dashboard_screen.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (_) => DashboardProvider()..loadDashboard(), // Check this name!
+      create: (_) => DashboardProvider()..loadDashboard(),
       child: const MyApp(),
     ),
   );

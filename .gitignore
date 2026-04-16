@@ -43,3 +43,20 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# --- MONOREPO UPDATES ---
+
+# Ignore Node.js dependencies
+**/node_modules/
+
+# Ignore Environment Variables (Crucial for security!)
+**/.env
+
+# Ensure Flutter build files are ignored in the subdirectory
+dashboard_app/build/
+dashboard_app/.dart_tool/
+dashboard_app/.flutter-plugins
+dashboard_app/.flutter-plugins-dependencies
+
+# Ignore sensitive database/config files if any exist in backend
+mining_backend/bin/
