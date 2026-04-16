@@ -1,25 +1,20 @@
-Your project is now structured as a **Monorepo**, which is highly professional. A great README should explain how both the **Flutter Frontend** and the **Node.js Backend** work together.
-
-I have written this specifically for your project, including the **ADB Reverse** trick and the **MongoDB Atlas** setup instructions.
-
-### Instructions:
-1. Create a file named `README.md` in your **root** folder (the "Mining Project" folder).
-2. Paste the following content into it.
-
----
-
-```markdown
 # Mining Analytics Dashboard 🚜💎
 
 A full-stack monitoring solution for mining operations. This project features a **Node.js/Express** backend connected to **MongoDB Atlas** and a **Flutter** mobile application for real-time data visualization.
 
-
+### 📱 Screenshots
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/952f2be3-0024-4e22-a45c-b8c4d1ddeefb" width="22%" />
+  <img src="https://github.com/user-attachments/assets/bc71a466-f266-4577-a6d0-7abe60f06c4c" width="22%" />
+  <img src="https://github.com/user-attachments/assets/abeb3a3c-a0a5-4246-95c4-fb5aa25ee562" width="22%" />
+  <img src="https://github.com/user-attachments/assets/321a9e82-3af1-40a0-9f17-01d62e4cc900" width="22%" />
+</p>
 
 ## 📂 Project Structure
 ```text
 Mining Project/
 ├── dashboard_app/      # Flutter Frontend (Charts & UI)
-└── mining_backend/    # Node.js Backend (REST API & Seeding)
+└── mining_backend/     # Node.js Backend (REST API & Seeding)
 ```
 
 ---
@@ -81,7 +76,7 @@ Mining Project/
 - **Cloud Integration:** Uses MongoDB Atlas for persistent storage of mining logs.
 - **RESTful API:** Node.js endpoints for fetching monthly stats and route-specific data.
 - **Dynamic Charts:** Flutter `fl_chart` implementation for Fuel consumption and Production metrics.
-- **Offline-First Ready:** Architectured for easy transition to local storage (Isar) if needed.
+- **Clean Architecture:** Separated services and providers for scalable state management.
 
 ## 🔒 Security & Best Practices
 - **Environment Variables:** Sensitive DB credentials are kept out of source control via `.gitignore`.
@@ -90,13 +85,3 @@ Mining Project/
 
 ## 👨‍💻 Developer
 **Niraj Mahale**
-```
-
----
-
-### Why this README is effective:
-* **Visual Structure:** The folder tree helps anyone who clones the repo understand where the code lives.
-* **Step-by-Step:** It guides a new developer through the exact order of operations (Backend first, then ADB, then Flutter).
-* **Professionalism:** Mentioning "Environment Variables" and "ADB Reverse" proves you know how real-world mobile development works.
-
-**Once you save this and push it to GitHub, your project will look 100% complete and ready for review!**
